@@ -186,3 +186,21 @@
     (ok is-supported)
   )
 )
+
+(define-public (set-protocol-fee (new-fee-bps uint))
+  (begin
+    (asserts! (is-eq tx-sender contract-owner) err-owner-only)
+    (asserts! (<= new-fee-bps u10000) (err u113))  ;; Ensure fee is not greater than 100%
+    
+    (var-set protocol-fee-bps new-fee-bps)
+    (ok new-fee-bps)
+  )
+)
+
+(define-public (set-fee-recipient (new-recipient principal))
+  (begin
+    (asserts! (is-eq tx-sender contract-owner) err-owner-only)
+    (var-set fee-recipient new-recipient)
+    (ok new-recipient)
+  )
+)
