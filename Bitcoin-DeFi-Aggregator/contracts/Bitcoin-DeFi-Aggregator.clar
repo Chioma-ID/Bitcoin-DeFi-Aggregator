@@ -55,3 +55,46 @@
   { user: principal, token-id: uint }
   { total-amount: uint }
 )
+
+;; Yield strategy types
+(define-map yield-strategies
+  { strategy-id: uint }
+  {
+    name: (string-ascii 64),
+    description: (string-ascii 256),
+    risk-level: uint,  ;; 1-5, where 1 is lowest risk and 5 is highest risk
+    enabled: bool,
+    target-yield: uint, ;; Target APY in basis points
+    min-deposit: uint,  ;; Minimum deposit required
+    max-deposit: uint,  ;; Maximum deposit allowed
+    rebalance-frequency: uint  ;; How often the strategy rebalances (in blocks)
+  }
+)
+
+
+;; User strategy allocations
+(define-map user-strategies
+  { user: principal, strategy-id: uint }
+  { amount: uint }
+)
+
+;; Track protocol statistics for historical data
+(define-map protocol-stats-daily
+  { protocol-id: uint, day: uint }
+  {
+    avg-yield: uint,
+    total-liquidity: uint,
+    txn-count: uint,
+    unique-users: uint
+  }
+)
+
+;; Route cache to optimize gas usage
+(define-map route-cache
+  { from-token: uint, to-token: uint, amount: uint }
+  {
+    best-route: (list 10 uint),  ;; List of protocol IDs to route through
+    expected-output: uint,
+    calculated-at-block: uint
+  }
+)
