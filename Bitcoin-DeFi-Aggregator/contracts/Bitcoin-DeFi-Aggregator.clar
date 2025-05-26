@@ -98,3 +98,19 @@
     calculated-at-block: uint
   }
 )
+
+;; Protocol fee settings
+(define-data-var protocol-fee-bps uint u10)  ;; 0.1% default fee
+(define-data-var fee-recipient principal contract-owner)
+
+;; Protocol counters
+(define-data-var next-protocol-id uint u1)
+(define-data-var next-token-id uint u1)
+(define-data-var next-strategy-id uint u1)
+
+;; Contract status
+(define-data-var contract-paused bool false)
+
+;; Governance variables
+(define-data-var governance-token principal .btc-defi-gov-token)
+(define-data-var proposal-threshold uint u100000000) ;; Minimum tokens needed to submit proposal
