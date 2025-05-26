@@ -267,3 +267,19 @@
   )
 )
 
+(define-public (emergency-pause)
+  (begin
+    (asserts! (is-eq tx-sender contract-owner) err-owner-only)
+    (var-set contract-paused true)
+    (ok true)
+  )
+)
+
+(define-public (emergency-unpause)
+  (begin
+    (asserts! (is-eq tx-sender contract-owner) err-owner-only)
+    (var-set contract-paused false)
+    (ok true)
+  )
+)
+
