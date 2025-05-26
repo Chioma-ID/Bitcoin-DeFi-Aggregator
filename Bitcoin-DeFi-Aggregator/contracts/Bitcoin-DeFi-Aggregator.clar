@@ -409,4 +409,18 @@
   (ok true)  ;; Simplified - would return user's strategy allocations
 )
 
+(define-constant err-flash-loan-not-repaid (err u123))
+
+(define-map flash-loans
+  { loan-id: uint }
+  {
+    borrower: principal,
+    token-id: uint,
+    amount: uint,
+    fee: uint,
+    block-borrowed: uint,
+    repaid: bool
+  }
+)
+
 
