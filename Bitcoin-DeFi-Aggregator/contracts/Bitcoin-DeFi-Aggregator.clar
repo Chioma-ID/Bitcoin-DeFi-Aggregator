@@ -37,3 +37,21 @@
     token-contract: principal
   }
 )
+
+;; Mapping to track which protocols support which tokens
+(define-map protocol-token-support
+  { protocol-id: uint, token-id: uint }
+  { supported: bool }
+)
+
+;; User positions across protocols
+(define-map user-positions
+  { user: principal, protocol-id: uint, token-id: uint }
+  { amount: uint }
+)
+
+;; Track total user deposits by token
+(define-map user-deposits
+  { user: principal, token-id: uint }
+  { total-amount: uint }
+)
